@@ -1,5 +1,4 @@
 const Songs = (props) => {
-  console.log(props);
   return (
     <div className="song-container">
       <img src={props.currentSong.cover} alt={props.currentSong.name}></img>

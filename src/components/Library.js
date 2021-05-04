@@ -1,17 +1,19 @@
 import LibrarySong from "./LibrarySongs";
 
-const Library = (props) => {
+const Library = ({ songs, setCurrentSong, audioRef, isPlaying }) => {
   return (
     <div className="library">
       <h1>Library</h1>
-      {props.songs.map((song) => {
+      {songs.map((song) => {
         return (
           <LibrarySong
-            songs={props.songs}
-            setCurrentSong={props.setCurrentSong}
+            songs={songs}
+            setCurrentSong={setCurrentSong}
             song={song}
             id={song.id}
             key={song.id}
+            audioRef={audioRef}
+            isPlaying={isPlaying}
           />
         );
       })}

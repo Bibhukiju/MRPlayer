@@ -5,18 +5,21 @@ import {
   faAngleLeft,
   faPause,
 } from "@fortawesome/free-solid-svg-icons";
-import { useRef, useState } from "react";
 
-const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
-  // Ref
-  const audioRef = useRef(null);
+const Player = ({
+  isPlaying,
+  setIsPlaying,
+  audioRef,
+  setSongInfo,
+  songInfo,
+}) => {
   //Event handler
-  const playSongHandler = () => {
+  const playSongHandler = async () => {
     if (isPlaying) {
-      audioRef.current.pause();
+      await audioRef.current.pause();
       setIsPlaying(!isPlaying);
     } else {
-      audioRef.current.play();
+      await audioRef.current.play();
       setIsPlaying(!isPlaying);
     }
   };
@@ -24,18 +27,6 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
     return (
       Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
     );
-  };
-
-  //State
-  const [songInfo, setSongInfo] = useState({
-    currentTime: 0,
-    duration: 0,
-  });
-  const timeUpdateHandler = (e) => {
-    const current = e.target.currentTime;
-    const duration = e.target.duration;
-    console.log(current);
-    setSongInfo({ ...songInfo, currentTime: current, duration });
   };
   const draghandler = (e) => {
     audioRef.current.currentTime = e.target.value;
@@ -68,12 +59,6 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
           icon={faAngleRight}
         />
       </div>
-      <audio
-        onLoadedMetadata={timeUpdateHandler}
-        onTimeUpdate={timeUpdateHandler}
-        ref={audioRef}
-        src={currentSong.audio}
-      ></audio>
     </div>
   );
 };
