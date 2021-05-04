@@ -5,6 +5,8 @@
   width: 20rem;
   height: 100%;
   box-shadow: 2px 2px 50px rgb(204, 204, 204);
+  transform: translateX(-100%);
+  transition: all 0.6s ease-in;
 }
 .library-song {
   display: flex;
@@ -28,4 +30,11 @@
   h4 {
     font-size: 0.7rem;
   }
+}
+.selected {
+  background: rgb(184, 184, 233);
+}
+.active-library {
+  transform: translateX(0);
+  opacity: 1;
 }

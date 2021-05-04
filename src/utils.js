@@ -29,7 +29,7 @@ function chillHop() {
       artist: "CYGN’s",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=16061",
       id: uuidv4(),
-      active: true,
+      active: false,
       color: ["#205950", "#2ab3bf"],
     },
     {

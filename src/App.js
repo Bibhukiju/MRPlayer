@@ -6,19 +6,22 @@ import "./Styles/app.scss";
 import Player from "./components/Player";
 import Songs from "./components/Song";
 import Library from "./components/Library";
+import Nav from "./components/nav";
 
 // import Utils
 import data from "./utils";
+
 function App() {
   const audioRef = useRef(null);
   // states
-  const [songs] = useState(data());
+  const [songs, setSongs] = useState(data());
   const [currentSong, setCurrentSong] = useState(songs[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
     duration: 0,
   });
+  const [libraryStatus, setLibraryStatus] = useState(false);
   const timeUpdateHandler = (e) => {
     const current = e.target.currentTime;
     const duration = e.target.duration;
@@ -26,9 +29,7 @@ function App() {
   };
   return (
     <div className="App">
-      <center>
-        <h1>React Music Player</h1>
-      </center>
+      <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
       <Songs currentSong={currentSong} />
       <Player
         currentSong={currentSong}
@@ -43,6 +44,8 @@ function App() {
         setCurrentSong={setCurrentSong}
         audioRef={audioRef}
         isPlaying={isPlaying}
+        setSongs={setSongs}
+        libraryStatus={libraryStatus}
       />
       <audio
         onLoadedMetadata={timeUpdateHandler}
