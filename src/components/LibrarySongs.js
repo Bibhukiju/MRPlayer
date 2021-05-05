@@ -1,4 +1,3 @@
-import { playAudio } from "../utils";
 const LibrarySong = ({
   songs,
   setCurrentSong,
@@ -25,7 +24,7 @@ const LibrarySong = ({
       }
     });
     setSongs(newSongs);
-    playAudio(isPlaying, audioRef);
+    if (isPlaying) audioRef.current.play();
   };
   return (
     <div
